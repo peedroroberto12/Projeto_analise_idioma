@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include <ctype.h>
+#include <math.h>
 
 
 typedef struct {
@@ -75,19 +76,34 @@ int main(){
         {'z', 0.47f}
     };
 
-    char texto[1024];
+    //char texto[1024];
 
-    printf("Digite uma frase para verificar o idioma: ");
-    fgets(texto, sizeof(texto), stdin);
+    //printf("Digite uma frase para verificar o idioma: ");
+    //fgets(texto, sizeof(texto), stdin);
+
+    char texto[1024] = "  This amazing accomplishment is just one step on your journey. Your ability to relentlessly search for solutions to problems and find innovative ways to improve the world is the key to this success and many to come";
 
     printf("Você digitou: %s", texto);
 
+    int letras = 0;
+
+    for (int i = 0; texto[i] != '\0'; i++) {
+    if (isalpha(texto[i])) {
+        letras++;
+    }
+}
+
     for (int i = 0; texto[i] != '\0'; i++) {
         char c = tolower(texto[i]);
-        textolido[c].chance += 1;
-
-
+        if (c >= 'a' && c <= 'z') {
+            textolido[c - 'a'].chance += 1;
+        }
     }
+
+    for (int i = 0; i < 26; i++) {
+        textolido[i].chance = (textolido[i].chance / letras) * 100;
+    }
+    
 
     printf("\nFrequência de cada letra no texto digitado:\n");
     for (int i = 0; i < 26; i++) {
@@ -95,8 +111,24 @@ int main(){
     }
 
 
+    //agora e necessario percorrer o textolido e comparar a diferenca de frequencia total em ingles e portugues
+
+    float total_ingles = 0.0f;
+    float total_portugues = 0.0f;
+    for (int i = 0; i < 26; i++) {
+        total_ingles += fabs(textolido[i].chance - ingles[i].chance) ;
+        total_portugues += fabs(textolido[i].chance - portugues[i].chance) ;
+    }
+    printf("\nTotal de diferença em relação ao inglês: %.2f\n", total_ingles);
+    printf("Total de diferença em relação ao português: %.2f\n", total_portugues);
+    if (total_ingles < total_portugues) {
+        printf("O texto digitado é mais semelhante ao inglês.\n");
+    } else if (total_portugues < total_ingles) {
+        printf("O texto digitado é mais semelhante ao português.\n");
+    } else {
+        printf("O texto digitado tem frequências semelhantes em inglês e português.\n");
+    }
 
 
     return 0;
-
 }
