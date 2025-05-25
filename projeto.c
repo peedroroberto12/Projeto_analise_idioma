@@ -113,13 +113,6 @@ int main(){
     for (int i = 0; i < 26; i++) {
         textolido[i].chance = (textolido[i].chance / letras) * 100;
     }
-    
-
-    printf("\nFrequência de cada letra no texto digitado:\n");
-    for (int i = 0; i < 26; i++) {
-        printf("%c: %.0f\n", textolido[i].letra, textolido[i].chance);
-    }
-
 
     //agora e necessario percorrer o textolido e comparar a diferenca de frequencia total em ingles e portugues
 
