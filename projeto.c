@@ -1,5 +1,14 @@
-#include <stdio.h>
+// Projeto: Verificador de idioma 
 
+//se possivel textar com textos razoavelmente longos, textos muito curtos tendem a gerar confusão devido a baixa amostra
+
+//Pedro Roberto Fernandes Noronha Ra: 10443434
+//Alice de Oliveira Duarte Ra: 10419323
+//Guilherme Silveira Giancomini Ra: 10435311
+
+
+
+#include <stdio.h>
 #include <ctype.h>
 #include <math.h>
 
@@ -76,12 +85,13 @@ int main(){
         {'z', 0.47f}
     };
 
-    //char texto[1024];
+    //comente as 3 linhas abaixo e descomente a linha 84 ou 85 para testar o programa com um texto fixo
+    char texto[1024];
+    printf("Digite uma frase para verificar o idioma: ");
+    fgets(texto, sizeof(texto), stdin);
 
-    //printf("Digite uma frase para verificar o idioma: ");
-    //fgets(texto, sizeof(texto), stdin);
-
-    char texto[1024] = "  This amazing accomplishment is just one step on your journey. Your ability to relentlessly search for solutions to problems and find innovative ways to improve the world is the key to this success and many to come";
+    //char texto[1024] = "A newly ordained priest was assigned to a town far from the city. It was his first assignment. He was determined to do his best to serve the town. When he arrived there, he was devastated to find a church that’s almost crumbling down. He asked the mayor who the last priest was and he said he couldn’t remember. No one had gone to church for years. The mayor wouldn’t help him rebuild the church. He called his seniors and they said he had to make do with what he had. But the priest wanted to make changes. So every day, he would saw, hammer, and dust the church. The people started to notice him and the clean church. On the 10th Sunday, he finished repairing the small bell tower. He rang the bell loudly. Few people came at first. But soon, he was able to fill the old church.";
+    //char texto[1024] = "Um padre recém-ordenado foi designado para uma cidade distante da capital. Era sua primeira missão. Ele estava determinado a fazer o seu melhor para servir a cidade. Quando chegou lá, ficou devastado ao encontrar uma igreja quase em ruínas. Perguntou ao prefeito quem tinha sido o último padre e ele disse que não se lembrava. Ninguém ia à igreja há anos. O prefeito não o ajudaria a reconstruir a igreja. Ele ligou para seus superiores e eles disseram que ele tinha que se contentar com o que tinha. Mas o padre queria fazer mudanças. Então, todos os dias, ele serrava, martelava e limpava a igreja. As pessoas começaram a notar ele e a igreja limpa. No décimo domingo, ele terminou de consertar o pequeno campanário. Ele tocou o sino alto. Poucas pessoas vieram no começo. Mas logo, ele conseguiu encher a velha igreja.";
 
     printf("Você digitou: %s", texto);
 
@@ -119,14 +129,13 @@ int main(){
         total_ingles += fabs(textolido[i].chance - ingles[i].chance) ;
         total_portugues += fabs(textolido[i].chance - portugues[i].chance) ;
     }
-    printf("\nTotal de diferença em relação ao inglês: %.2f\n", total_ingles);
-    printf("Total de diferença em relação ao português: %.2f\n", total_portugues);
+
     if (total_ingles < total_portugues) {
-        printf("O texto digitado é mais semelhante ao inglês.\n");
+        printf("O texto digitado deve ser inglês.\n");
     } else if (total_portugues < total_ingles) {
-        printf("O texto digitado é mais semelhante ao português.\n");
+        printf("O texto digitado deve ser português.\n");
     } else {
-        printf("O texto digitado tem frequências semelhantes em inglês e português.\n");
+        printf("Impossivel de determinar\n");
     }
 
 
